@@ -1,0 +1,27 @@
+name: Deploying WordPress Site
+
+on:
+  push:
+    branches:
+      - main  # Adjust this based on the branch you want to trigger deployment
+
+jobs:
+  deploy:
+    name: Deploy WordPress
+    runs-on: ubuntu-latest  # Change to a different runner if needed (e.g., windows-latest)         # uses: webfactory/ssh-agent@v0.5.3
+
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+        
+      - name: Sync Files
+        uses: SamKirkland/web-deploy@v1
+        with:
+          target-server: 3.24.178.18
+          remote-user: bitnami
+          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+          destination-path: /home/bitnami/htdocs
+    
+
+
