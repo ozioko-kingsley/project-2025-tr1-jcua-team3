@@ -15,18 +15,28 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
 
-      # - name: Set up SSH key
-      #   uses: webfactory/ssh-agent@v0.5.3
-      #   with:
-      #     ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+      - name: Set up SSH key
+        uses: webfactory/ssh-agent@v0.5.3
+        with:
+          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
 
-      - name: Sync Files
+      - name: Sync Files to Remote Server
         uses: SamKirkland/web-deploy@v1
         with:
-         target-server: 3.24.178.18  # Replace with your server's IP or domain
-         remote-user: bitnami         # Replace with your SSH username on the server
-         private-ssh-key: ${{ secrets.SSH_PRIVATE_KEY }}  # Private SSH key from GitHub Secrets
-         destination-path: /var/www/html/wordpress  # Path where you want the files to go
+          target-server: 3.24.178.18  # Remote server IP or domain
+          remote-user: bitnami         # SSH username on the server
+          private-ssh-key: ${{ secrets.SSH_PRIVATE_KEY }}
+          destination-path: /var/www/html/wordpress
+          ssh-port: 22
+          rsync-options: --archive --verbose --compress --human-readable --progress --delete-after --exclude=.git* --exclude=.git/ --exclude=README.md --exclude=readme.md --exclude=.gitignore
+
+      # - name: Sync Files
+      #   uses: SamKirkland/web-deploy@v1
+      #   with:
+      #    target-server: 3.24.178.18  # Replace with your server's IP or domain
+      #    remote-user: bitnami         # Replace with your SSH username on the server
+      #    private-ssh-key: ${{ secrets.SSH_PRIVATE_KEY }}  # Private SSH key from GitHub Secrets
+      #    destination-path: /var/www/html/wordpress  # Path where you want the files to go
 
           # target-server: 3.24.178.18
           # remote-user: bitnami
