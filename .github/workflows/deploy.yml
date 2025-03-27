@@ -15,14 +15,23 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
 
-      - name: Set up SSH key
-        uses: webfactory/ssh-agent@v0.5.3
-        with:
-          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+      # - name: Set up SSH key
+      #   uses: webfactory/ssh-agent@v0.5.3
+      #   with:
+      #     ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
 
       - name: Sync Files
         uses: SamKirkland/web-deploy@v1
         with:
-          target-server: 3.24.178.18
-          remote-user: bitnami
-          destination-path: /home/bitnami/htdocs
+         target-server: 3.24.178.18  # Replace with your server's IP or domain
+         remote-user: bitnami         # Replace with your SSH username on the server
+         private-ssh-key: ${{ secrets.SSH_PRIVATE_KEY }}  # Private SSH key from GitHub Secrets
+         destination-path: /var/www/html/wordpress  # Path where you want the files to go
+
+          # target-server: 3.24.178.18
+          # remote-user: bitnami
+          # destination-path: /home/bitnami/htdocs
+          # remote-server: 3.24.178.18 
+          # remote-path: /var/www/html/wordpress  # The folder on the server to deploy to
+          # local-path: ./wordpress  # The folder in the repo containing WordPress files
+
