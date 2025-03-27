@@ -26,7 +26,7 @@ jobs:
           target-server: 3.24.178.18  # Remote server IP or domain
           remote-user: bitnami         # SSH username on the server
           private-ssh-key: ${{ secrets.SSH_PRIVATE_KEY }}
-          destination-path: /var/www/html/wordpress
+          destination-path: /home/bitnami/htdocs
           ssh-port: 22
           rsync-options: --archive --verbose --compress --human-readable --progress --delete-after --exclude=.git* --exclude=.git/ --exclude=README.md --exclude=readme.md --exclude=.gitignore
 
