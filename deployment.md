@@ -1,14 +1,36 @@
-## Deployment
+# Deployment
 
 This is where we will describe our development and deployment workflow in enough detail that a new team member or someone taking over the project could follow to successfully develop theme updates locally, then test and deploy them to your staging and live sites. This should include aspects such as project management, version control, testing and automation. **Do not provide private details like passwords.**
 
-## Setting up your local environment  #TODO
+## Base Theme Version
 
 Once you've set up your own local environment (WAMP, MAMP, XAMP, Docker), download the starter theme from:
 
-> `/project_resources/themes/starter-theme.zip`
+- `/project_resources/themes/starter-theme.zip`
 
 Use the theme editor in wordpress to install the starter theme
+
+## Sassified Theme Version with Gulp
+
+### 1. Download the sass version:
+- `/project_resources/themes/starter-theme-sass.zip`
+
+### 2. Install and Set Up the Theme
+- Extract the `starter-theme-sass.zip` file.
+- Move the extracted folder to your local WordPress installation directory under `/wp-content/themes/`
+
+### 3. Install Node.js and Dependencies
+- Ensure [Node.js](https://nodejs.org/) is installed.
+- Open your terminal and navigate to the theme directory:
+>bash cd `/path/to/starter-theme-sass`
+- Install the required dependencies:
+>bash npm install
+
+### 4. Set Up Gulp for Sass Compilation
+- Install Gulp globally:
+>bash npm install -g gulp-cli
+- Start Gulp to watch and compile Sass:
+>bash gulp
 
 ## Create Staging and Live sites using Hosting  #TODO
 ## Set up GitHub Actions to Automate deployment
